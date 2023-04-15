@@ -1,11 +1,13 @@
-//require("dotenv").config();
-const passwords = require("./config.json");
+//const passwords = require("./config.json");
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+require("dotenv").config();
+
+//console.log(process.env);
 
 //server used to send emails and make API calls
 const port = 5100;
@@ -17,13 +19,14 @@ app.use("/", router);
 app.listen(port, () => console.log(`Server Running on port ${port}`));
 
 // Process.env doesnt seem to be working for these variables
-//const emailUser = process.env.EMAIL_USER;
-//const emailPass = process.env.EMAIL_PASS;
+const emailUser = process.env.EMAIL_USER;
+const emailPass = process.env.EMAIL_PASS;
 //console.log(process.env.EMAIL_USER);
 //console.log(process.env.EMAIL_PASS);
 
-const emailUser = passwords.EMAIL_USER;
-const emailPass = passwords.EMAIL_PASS;
+//const emailUser = passwords.EMAIL_USER;
+//const emailPass = passwords.EMAIL_PASS;
+
 //console.log(passwords.EMAIL_USER);
 //console.log(passwords.EMAIL_PASS);
 //console.log(emailUser);
@@ -52,7 +55,8 @@ contactEmail.verify((error) => {
 //===========//===========//===========//===========//===========//===========
 
 const { Configuration, OpenAIApi } = require("openai");
-const openAiApiKey = passwords.OPENAI_API_KEY;
+const openAiApiKey = process.env.OPENAI_API_KEY;
+//const openAiApiKey = passwords.OPENAI_API_KEY;
 // Content coming from config.json file
 //const gptPrompt = passwords.GPT_PROMPT;
 //console.log(gptPrompt);
